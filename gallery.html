@@ -364,6 +364,46 @@
 "pixel_l1_sds_bench/166816935812_grid_l1_sds_32x32_id126_a_stork_playing_a_violin.svg",
 "pixel_l1_sds_bench/166816935818_grid_l1_sds_32x32_id123_a_circular_logo.svg",
 "pixel_l1_sds_bench/166816935819_grid_l1_sds_32x32_id125_an_armchair_in_the_shape.svg",
+"paths_16/A_cat_as_3D_rendered.svg",
+"paths_16/Third_eye._minimal_2d_line.svg",
+"paths_16/A_3D_rendering_of_a.svg",
+"paths_16/A_3D_wireframe_model_of.svg",
+"paths_16/A_realistic_painting_of_a.svg",
+"paths_16/Horse_eating_a_cupcake._minimal.svg",
+"paths_16/a_basketball_to_the_left.svg",
+"paths_16/A_watercolor_painting_of_a.svg",
+"paths_16/A_torii_gate._minimal_2d.svg",
+"paths_16/A_Japanese_woodblock_print_of.svg",
+"paths_16/自転車._minimal_2d_line_drawing..svg",
+// "paths_16/Self._minimal_2d_line_drawing..svg",
+"paths_16/A_spaceship_flying_in_a.svg",
+"paths_16/a_hot_air_balloon_with.svg",
+"paths_16/Family_vacation_to_Walt_Disney.svg",
+"paths_16/The_Eiffel_Tower._minimal_2d.svg",
+"paths_16/A_dragon-cat_hybrid._minimal_2d.svg",
+"paths_16/Happiness._minimal_2d_line_drawing..svg",
+"paths_16/a_photograph_of_a_fiddle.svg",
+"paths_16/a_boat._minimal_2d_line.svg",
+"paths_16/Underwater_Submarine._minimal_2d_line.svg",
+"paths_16/A_painting_of_a_starry.svg",
+"paths_16/A_realistic_photograph_of_a.svg",
+"paths_16/Yeti_taking_a_selfie._minimal.svg",
+"paths_16/a_crown._minimal_2d_line.svg",
+"paths_16/Enlightenment._minimal_2d_line_drawing..svg",
+"paths_16/Translation._minimal_2d_line_drawing..svg",
+"paths_16/Fast_Food._minimal_2d_line.svg",
+"paths_16/Forest_Temple_as_3D_rendered.svg",
+"paths_16/a_baby_penguin._minimal_2d.svg",
+"paths_16/a_tree._minimal_2d_line.svg",
+"paths_16/Hashtag._minimal_2d_line_drawing..svg",
+"paths_16/Watercolor_painting_of_a_fire-breathing.svg",
+"paths_16/A_drawing_of_a_cat..svg",
+"paths_16/the_Great_Wall._minimal_2d.svg",
+"paths_16/The_space_between_infinity._minimal.svg",
+"paths_16/a_ladder._minimal_2d_line.svg",
+"paths_16/an_elephant._minimal_2d_line.svg",
+"paths_16/a_bottle_of_beer_next.svg",
+"paths_16/a_tall_horse_next_to.svg",
   ];
 
   const allCaptions = [
@@ -498,10 +538,15 @@
   ];
 
   const omitPhrases = [
+    'minimal 2d line drawing.',
+    'minimal 2d line drawing',
     'minimal flat 2d vector',
     'minimal flat 2d',
     'minimal flat',
+    'minimal 2d line',
+    'minimal 2d',
     'minimal',
+    '2d',
   ];
 
   shuffleArray(videoPaths);
@@ -520,11 +565,15 @@
       let videoPath = videoPaths[i];
       let caption = videoPath;
       if (videoPath.startsWith("live_sds_64paths_4rejections")) {
-        caption = videoPath.replace("_output-svg_8-8-16-16-16-0-bg.svg", "").replace("live_sds_64paths_4rejections/LIVE_SDS_benchmark_", "").replace("_flat64_livesds_8_8_16_16_16_0_id", "");
-      } else {
-        caption = videoPath.replace("pixel_l1_sds_bench/", "").replace("_grid_l1_sds_32x32_id", "").replace(".svg", "")
+        caption = videoPath.replace("_output-svg_8-8-16-16-16-0-bg", "").replace("live_sds_64paths_4rejections/LIVE_SDS_benchmark_", "").replace("_flat64_livesds_8_8_16_16_16_0_id", "");
+        caption = caption.replace(".svg", "").slice("166807999643".length + "000_".length).replaceAll("_", " ");
+      } else if (videoPath.startsWith("pixel_l1_sds_bench")) {
+        caption = videoPath.replace("pixel_l1_sds_bench/", "").replace("_grid_l1_sds_32x32_id", "");
+        caption = caption.replace(".svg", "").slice("166807999643".length + "000_".length).replaceAll("_", " ");
+      } else if (videoPath.startsWith("paths_16")) {
+        caption = videoPath.replace("paths_16/", "").replace(".svg", "").replaceAll("_", " ");
+        // minimal 2d line drawing. on a white background
       }
-      caption = caption.slice("166807999643".length + "000_".length).replaceAll("_", " ");
       let captionShort = caption;
       for (let i = 0; i < omitPhrases.length; i++) {
         captionShort = captionShort.replace(omitPhrases[i], '[...]');
@@ -560,7 +609,6 @@
       //   componentSource = document.createElement("SOURCE")
       //   componentSource.type = "video/mp4"
       //   componentSource.setAttribute('data-src',
-      //     "https://dreamfusion-cdn.ajayj.com/gallery_sept28/crf20/" + videoPath);
       //   componentVideo.appendChild(componentSource);
       // }
       inner.appendChild(componentVideo);
