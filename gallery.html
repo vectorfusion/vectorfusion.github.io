@@ -549,6 +549,12 @@
     '2d',
   ];
 
+  const promptSuffixes = {
+    'live_sds_64paths_4rejections': 'minimal flat 2d vector icon. lineal color. on a white background. trending on artstation',
+    'pixel_l1_sds_bench': 'pixel art. trending on artstation',
+    'paths_16': 'minimal 2d line drawing. on a white background'
+  }
+
   shuffleArray(videoPaths);
 
   // document.addEventListener("DOMContentLoaded", function() {
@@ -572,46 +578,22 @@
         caption = caption.replace(".svg", "").slice("166807999643".length + "000_".length).replaceAll("_", " ");
       } else if (videoPath.startsWith("paths_16")) {
         caption = videoPath.replace("paths_16/", "").replace(".svg", "").replaceAll("_", " ");
-        // minimal 2d line drawing. on a white background
       }
-      let captionShort = caption;
       for (let i = 0; i < omitPhrases.length; i++) {
-        captionShort = captionShort.replace(omitPhrases[i], '[...]');
+        caption = caption.replace(omitPhrases[i], '');
       }
       for (let otherCaption of allCaptions) {
-        if (otherCaption.startsWith(captionShort)) {
+        if (otherCaption.startsWith(caption)) {
           caption = otherCaption;
-          captionShort = caption;
-          for (let i = 0; i < omitPhrases.length; i++) {
-            captionShort = captionShort.replace(omitPhrases[i], '[...]');
-          }
-          break;
         }
       }
+      let captionShort = caption.trim() + ' [...]';
+      caption = caption.trim() + ' ' + promptSuffixes[videoPath.split('/')[0]];
 
-      var componentVideo = document.createElement("IMG");
-      // componentVideo.loop = true;
-      // componentVideo.playsinline = true;
-      // componentVideo.preload = "metadata";
-      // componentVideo.muted = true;
-      // componentVideo.width = "300";
-      // componentVideo.autoplay = true;
-      // if (isIOS) {
-        // Autoplay doesn't seem to work.
-        componentVideo.classList = "video lazy";
-        componentVideo.src = "https://pub-751dccf31fca4af7b5a452d19d49cf43.r2.dev/" + videoPath;
-        // componentVideo.controls = true;
-      // } else {
-        // componentVideo.controls = false;
-        // componentVideo.classList = "video";
-      //   componentVideo.onmouseout = componentVideo.play;
-      //   componentVideo.onmouseover = componentVideo.pause;
-      //   componentSource = document.createElement("SOURCE")
-      //   componentSource.type = "video/mp4"
-      //   componentSource.setAttribute('data-src',
-      //   componentVideo.appendChild(componentSource);
-      // }
-      inner.appendChild(componentVideo);
+      var componentImg = document.createElement("IMG");
+      componentImg.classList = "video lazy";
+      componentImg.src = "https://pub-751dccf31fca4af7b5a452d19d49cf43.r2.dev/" + videoPath;
+      inner.appendChild(componentImg);
 
       var fullCaption = document.createElement("span");
       fullCaption.classList = "name invisible";
@@ -626,12 +608,15 @@
 
       var hparams = document.createElement("p");
       hparams.classList = "hparams";
-      if (videoPath.includes("live_sds_64paths_4rejections")) {
+      if (videoPath.startsWith("live_sds_64paths_4rejections")) {
         hparams.appendChild(document.createTextNode("SD + LIVE + SDS, 64 paths"));
         // hparams.appendChild(document.createTextNode("SD + LIVE + SDS, 64 paths, 4 rejections"));
         inner.appendChild(hparams);
-      } else if (videoPath.includes("pixel_l1_sds_bench")) {
+      } else if (videoPath.startsWith("pixel_l1_sds_bench")) {
         hparams.appendChild(document.createTextNode("SD + LIVE + SDS, 32x32 pixel art"));
+        inner.appendChild(hparams);
+      } else if (videoPath.startsWith("paths_16")) {
+        hparams.appendChild(document.createTextNode("SDS, 16 black Bézier curves"));
         inner.appendChild(hparams);
       }
 
