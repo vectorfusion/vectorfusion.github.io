@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3PR2Y1TQ"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>VectorFusion: Text-to-SVG by Abstracting Pixel-Based Diffusion Models</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/assets/css/Highlight-Clean.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <script src="assets/js/video_comparison.js"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@2.0.1/dist/model-viewer.min.js"></script>
+</head>
+
+<body>
+    <div class="highlight-clean" style="padding-bottom: 10px;">
+        <div class="container" style="max-width: 768px;">
+            <h1 class="text-center"><b>VectorFusion</b>: Text-to-SVG by Abstracting Pixel-Based Diffusion Models</h1>
+        </div>
+        <div class="container" style="max-width: 768px;">
+            <div class="row authors">
+                <div class="col-sm-12">
+                    <h5 class="text-center">Authors anonymized</h5>
+                </div>
+           </div>    
+        </div>
+        <div class="buttons" style="margin-bottom: 8px;">
+            <a class="btn btn-light disabled border border-dark" aria-disabled="true" role="button" href="#">
+                <svg style="visibility:hidden;width:0px;height:24px;margin-left:-12px;margin-right:12px" width="0px" height="24px" viewBox="0 0 375 531">
+                    <polygon stroke="#000000" points="0.5,0.866 459.5,265.87 0.5,530.874 "/>
+                </svg>
+                Project
+            </a>
+            <a class="btn btn-light" role="button" href="/gallery.html">
+                <svg style="width:24px;height:24px;margin-left:-12px;margin-right:12px" width="24px" height="24px" viewBox="0 0 375 531">
+                    <polygon stroke="#000000" points="0.5,0.866 459.5,265.87 0.5,530.874 "/>
+                </svg>
+                Gallery
+            </a>
+        </div>
+    </div>
+    <hr class="divider" />
+    <div class="container" style="max-width: 768px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Abstract</h2>
+                <p>
+                        Diffusion models have shown impressive results in text-to-image synthesis. Using massive datasets of captioned images, diffusion models learn to generate raster images of highly diverse objects and scenes. However, designers frequently use vector representations of images like Scalable Vector Graphics (SVGs) for digital icons, graphics and stickers. Vector graphics can be scaled to any size, and are compact. In this work, we show that a text-conditioned diffusion model trained on pixel representations of images can be used to generate SVG-exportable vector graphics. We do so without access to large datasets of captioned SVGs. Instead, inspired by recent work on text-to-3D synthesis, we vectorize a text-to-image diffusion sample and fine-tune with a Score Distillation Sampling loss. By optimizing a differentiable vector graphics rasterizer, our method distills abstract semantic knowledge out of a pretrained diffusion model. By constraining the vector representation, we can also generate coherent pixel art and sketches. Our approach, VectorFusion, produces more coherent graphics than prior works that optimize CLIP, a contrastive image-text model.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <hr class="divider" />
+    <div class="container" style="max-width: 768px;">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Example generated vectors</h2>
+                <p>VectorFusion generates vector graphics from diverse captions. <a href="/gallery.html">Search through SVGs in our gallery.</a></p>
+            </div>
+            <div class="col-sm-4 my-auto">
+                <a href="/gallery.html" class="btn btn-primary btn-lg btn-search"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewbox="0 0 600 550">
+                    <path fill="none" stroke="#fff" stroke-width="36" stroke-linecap="round" d="m280,278a153,153 0 1,0-2,2l170,170m-91-117 110,110-26,26-110-110"/>
+                    </svg>Search SVGs
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="divider" />
+    <div class="container" style="max-width: 768px;">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Infinitely scalable assets</h2>
+                <p>Vector graphics are compact but can be scaled to arbitrary size while staying sharp. Caption: <em>"a train. minimal flat 2d vector icon. lineal color. on a white background.
+                    trending on artstation."</em></p>
+            </div>
+            <div class="col-sm-6 my-auto">
+                <iframe style="border: none" width="550" height="550" class="rive-frame" src="https://rive.app/s/LZrLUQ_9NU6wGwcyoL81eQ/embed" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="https://polyfill.io/v3/polyfill.js?features=IntersectionObserver"></script>
+    <script src="/assets/js/yall.js"></script>
+    <script>
+        yall(
+            {
+                observeChanges: true
+            }
+        );
+    </script>
+    <!-- <script src="/assets/js/scripts.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/js/webflow.fd002feec.js"></script>
+    <!-- Import the component -->
+</body>
+
+</html>
