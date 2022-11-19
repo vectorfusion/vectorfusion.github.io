@@ -521,8 +521,6 @@
         var componentCaption = document.createElement("h6");
         componentCaption.classList = "caption";
         componentCaption.title = caption;
-        // if (caption.length > 100)
-        //     componentCaption.style = "font-size: 12px;";
         componentCaption.appendChild(document.createTextNode(captionShort));
         inner.appendChild(componentCaption);
 
@@ -542,6 +540,8 @@
         outer.appendChild(inner);
         rowEl.appendChild(outer);
         thumbnails.appendChild(rowEl);
+
+        $(componentCaption).tooltip({'placement': 'bottom'});
     }
     }
 })();
