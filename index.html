@@ -99,7 +99,7 @@
                 <h2>Visualizing text-to-SVG generation</h2>
                 <p>We generate SVGs from text in an efficient multi-stage process. First, our method samples raster images from the <a href="https://arxiv.org/abs/2112.10752">Stable Diffusion</a> text-to-image <a href="https://arxiv.org/abs/2006.11239">diffusion model</a>. VectorFusion then traces those samples automatically with <a href="https://ma-xu.github.io/LIVE/">LIVE</a>. However, these samples are often difficult to convert to vector graphics, dull, or don't reflect all the details of the text. Our approach finally refines samples with an image-text loss based on <a href="https://arxiv.org/abs/2209.14988">Score Distillation Sampling</a>, improving vibrancy and consistency with the text. VectorFusion uses an inverse graphics approach, enabled by the <a href="https://people.csail.mit.edu/tzumao/diffvg/">DiffVG</a> differentiable SVG renderer.
                 </p>
-                <video class="video lazy d-none d-xs-none d-sm-block" autoplay="" loop="" playsinline="" muted="" poster="https://pub-751dccf31fca4af7b5a452d19d49cf43.r2.dev/optimization/vectorfusion_64paths_72videos.jpg">
+                <video class="video lazy d-none d-xs-none d-sm-block" autoplay="" loop="" playsinline="" muted="" controls="" poster="https://pub-751dccf31fca4af7b5a452d19d49cf43.r2.dev/optimization/vectorfusion_64paths_72videos.jpg">
                     <source data-src="https://pub-751dccf31fca4af7b5a452d19d49cf43.r2.dev/optimization/vectorfusion_64paths_72videos_encode2p5k.mp4" type="video/mp4" src="https://pub-751dccf31fca4af7b5a452d19d49cf43.r2.dev/optimization/vectorfusion_64paths_72videos_encode2p5k.mp4">
                 </video>
             </div>
