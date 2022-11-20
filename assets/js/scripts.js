@@ -470,78 +470,86 @@
 
       let videoPaths = [iconPaths, pixelPaths, sketchPaths];
     
-    var thumbnails = document.getElementById("randomVideos");
-    for (var row = 0; row < 3; row++) {
-    let rowEl = document.createElement("DIV");
-    rowEl.classList = "row captioned_videos";
-    for (var i = row*4; i < row*4+4; i++) {
-        let outer = document.createElement("DIV");
-        outer.classList = "col-3";
-        let inner = document.createElement("DIV");
-        inner.classList = "video-compare-container";
-        inner.style = "width: 100%;"
+    let thumbnails = document.getElementById("randomVideos");
+    for (let row = 0; row < 3; row++) {
+      let rowEl = document.createElement("DIV");
+      rowEl.classList = "row captioned_videos";
+      for (let col = row*4; col < row*4+4; col++) {
+          let outer = document.createElement("DIV");
+          if (col < row*4 + 2) {
+            outer.classList = "col-sm-3 col-6";
+          } else {
+            outer.classList = "col-sm-3 d-none d-sm-block";
+          }
+          let inner = document.createElement("DIV");
+          inner.classList = "video-compare-container";
+          inner.style = "width: 100%;"
 
-        let videoPath = videoPaths[row][i];
-        let caption = videoPath;
-        if (videoPath.startsWith("live_sds_64paths_4rejections")) {
-            caption = videoPath.replace("_output-svg_8-8-16-16-16-0-bg", "").replace("live_sds_64paths_4rejections/LIVE_SDS_benchmark_", "").replace("_flat64_livesds_8_8_16_16_16_0_id", "");
-            caption = caption.replace(".svg", "").slice("166807999643".length + "000_".length).replaceAll("_", " ");
-        } else if (videoPath.startsWith("pixel_l1_sds_bench")) {
-            caption = videoPath.replace("pixel_l1_sds_bench/", "").replace("_grid_l1_sds_32x32_id", "");
-            caption = caption.replace(".svg", "").slice("166807999643".length + "000_".length).replaceAll("_", " ");
-        } else if (videoPath.startsWith("paths_16")) {
-            caption = videoPath.replace("paths_16/", "").replace(".svg", "").replaceAll("_", " ");
-        }
-        for (let i = 0; i < omitPhrases.length; i++) {
-        caption = caption.replace(omitPhrases[i], '');
-        }
-        for (let otherCaption of allCaptions) {
-        if (otherCaption.startsWith(caption)) {
-            caption = otherCaption;
-        }
-        }
-        let captionShort = caption.trim();
-        if (captionShort.length > 70) {
-            captionShort = captionShort.replace(/^(.{50}[^\s]*).*/, "$1") + ' [...]';
-        } else {
-            captionShort = captionShort + ' [...]';
-        }
-        caption = caption.trim() + ' ' + promptSuffixes[videoPath.split('/')[0]];
+          let videoPath = videoPaths[row][col];
+          let caption = videoPath;
+          if (videoPath.startsWith("live_sds_64paths_4rejections")) {
+              caption = videoPath.replace("_output-svg_8-8-16-16-16-0-bg", "").replace("live_sds_64paths_4rejections/LIVE_SDS_benchmark_", "").replace("_flat64_livesds_8_8_16_16_16_0_id", "");
+              caption = caption.replace(".svg", "").slice("166807999643".length + "000_".length).replaceAll("_", " ");
+          } else if (videoPath.startsWith("pixel_l1_sds_bench")) {
+              caption = videoPath.replace("pixel_l1_sds_bench/", "").replace("_grid_l1_sds_32x32_id", "");
+              caption = caption.replace(".svg", "").slice("166807999643".length + "000_".length).replaceAll("_", " ");
+          } else if (videoPath.startsWith("paths_16")) {
+              caption = videoPath.replace("paths_16/", "").replace(".svg", "").replaceAll("_", " ");
+          }
+          for (let i = 0; i < omitPhrases.length; i++) {
+          caption = caption.replace(omitPhrases[i], '');
+          }
+          for (let otherCaption of allCaptions) {
+          if (otherCaption.startsWith(caption)) {
+              caption = otherCaption + '.';
+          }
+          }
+          let captionShort = caption.trim();
+          if (captionShort.length > 70) {
+              captionShort = captionShort.replace(/^(.{50}[^\s]*).*/, "$1") + ' [...]';
+          } else {
+              captionShort = captionShort + ' [...]';
+          }
+          caption = caption.trim();
+          if (!caption.endsWith('.')) {
+            caption = caption + '.';
+          }
+          caption = caption + ' ' + promptSuffixes[videoPath.split('/')[0]];
 
-        var componentImg = document.createElement("IMG");
-        componentImg.classList = "video lazy";
-        componentImg.src = "https://pub-751dccf31fca4af7b5a452d19d49cf43.r2.dev/" + videoPath;
-        inner.appendChild(componentImg);
+          var componentImg = document.createElement("IMG");
+          componentImg.classList = "video lazy";
+          componentImg.src = "https://pub-751dccf31fca4af7b5a452d19d49cf43.r2.dev/" + videoPath;
+          inner.appendChild(componentImg);
 
-        var fullCaption = document.createElement("span");
-        fullCaption.classList = "name invisible";
-        fullCaption.appendChild(document.createTextNode(caption))
-        inner.appendChild(fullCaption);
+          var fullCaption = document.createElement("span");
+          fullCaption.classList = "name invisible";
+          fullCaption.appendChild(document.createTextNode(caption))
+          inner.appendChild(fullCaption);
 
-        var componentCaption = document.createElement("h6");
-        componentCaption.classList = "caption";
-        componentCaption.title = caption;
-        componentCaption.appendChild(document.createTextNode(captionShort));
-        inner.appendChild(componentCaption);
+          var componentCaption = document.createElement("h6");
+          componentCaption.classList = "caption";
+          componentCaption.title = caption;
+          componentCaption.appendChild(document.createTextNode(captionShort));
+          inner.appendChild(componentCaption);
 
-        // var hparams = document.createElement("p");
-        // hparams.classList = "hparams";
-        // if (videoPath.startsWith("live_sds_64paths_4rejections")) {
-        // hparams.appendChild(document.createTextNode("SD + LIVE + SDS, 64 paths"));
-        // inner.appendChild(hparams);
-        // } else if (videoPath.startsWith("pixel_l1_sds_bench")) {
-        // hparams.appendChild(document.createTextNode("SD + LIVE + SDS, 32x32 pixel art"));
-        // inner.appendChild(hparams);
-        // } else if (videoPath.startsWith("paths_16")) {
-        // hparams.appendChild(document.createTextNode("SDS, 16 black Bézier curves"));
-        // inner.appendChild(hparams);
-        // }
+          // var hparams = document.createElement("p");
+          // hparams.classList = "hparams";
+          // if (videoPath.startsWith("live_sds_64paths_4rejections")) {
+          // hparams.appendChild(document.createTextNode("SD + LIVE + SDS, 64 paths"));
+          // inner.appendChild(hparams);
+          // } else if (videoPath.startsWith("pixel_l1_sds_bench")) {
+          // hparams.appendChild(document.createTextNode("SD + LIVE + SDS, 32x32 pixel art"));
+          // inner.appendChild(hparams);
+          // } else if (videoPath.startsWith("paths_16")) {
+          // hparams.appendChild(document.createTextNode("SDS, 16 black Bézier curves"));
+          // inner.appendChild(hparams);
+          // }
 
-        outer.appendChild(inner);
-        rowEl.appendChild(outer);
-        thumbnails.appendChild(rowEl);
+          outer.appendChild(inner);
+          rowEl.appendChild(outer);
+          thumbnails.appendChild(rowEl);
 
-        $(componentCaption).tooltip({'placement': 'bottom'});
-    }
+          $(componentCaption).tooltip({'placement': 'bottom'});
+      }
     }
 })();

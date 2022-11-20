@@ -343,10 +343,12 @@
     text-align: center;
 }
 
-/* .captioned_videos { */
-    /* padding-bottom: 20px; */
-    /* margin-top: 16px; */
-/* } */
+/* .captioned_videos img {
+    max-width: 250px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+} */
 
 .captioned_videos h6 {
     max-width: 768px;

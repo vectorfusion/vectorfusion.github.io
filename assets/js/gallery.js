@@ -489,11 +489,17 @@ $(function () {
       }
       for (let otherCaption of allCaptions) {
         if (otherCaption.startsWith(caption)) {
-          caption = otherCaption;
+          caption = otherCaption + '.';
         }
       }
+
+      // Add prompt suffix.
       let captionShort = caption.trim() + ' [...]';
-      caption = caption.trim() + ' ' + promptSuffixes[videoPath.split('/')[0]];
+      caption = caption.trim()
+      if (!caption.endsWith('.')) {
+        caption = caption + '.';
+      }
+      caption = caption + ' ' + promptSuffixes[videoPath.split('/')[0]];
 
       var componentImg = document.createElement("IMG");
       componentImg.classList = "video lazy";
